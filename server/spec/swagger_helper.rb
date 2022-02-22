@@ -15,12 +15,13 @@ RSpec.configure do |config|
   # document below. You can override this behavior by adding a swagger_doc tag to the
   # the root example_group in your specs, e.g. describe '...', swagger_doc: 'v2/swagger.json'
   config.swagger_docs = {
-    'v1/swagger.yaml' => {
+    'api/v1/swagger.json' => {
       openapi: '3.0.1',
       info: {
         title: 'API V1',
         version: 'v1'
       },
+      basePath: '/api/v1',
       paths: {},
       servers: [
         {
@@ -33,7 +34,87 @@ RSpec.configure do |config|
         }
       ],
       components: {
-        schemas: {}
+        schemas: {
+          objective_attributes: {
+            type: 'object',
+            properties: {                    
+              title: {
+                type: 'string'
+              },
+              weight: {
+                type: 'integer',
+                format: 'int32'
+              },
+              created_at: {
+                type: 'string',
+                format: 'date-time'
+              },
+              updated_at: {
+                type: 'string',
+                format: 'date-time'
+              }   
+            },
+            required: ['title', 'weight', 'created_at', 'updated_at']         
+          },
+          objective: {
+            type: 'object',
+            properties: {
+              data: {
+                type: 'object',
+                properties: {
+                  type: {
+                    type: 'string',
+                    value: 'objectives'
+                  },
+                  id: {
+                    type: 'integer',
+                    format: 'int64'
+                  },
+                  attributes: {
+                    schema: '#/components/schemas/objective_attributes'
+                  },
+                  required: ['type', 'id', 'attributes']
+                }
+              }
+            }
+          },
+          objectives: {
+            type: 'object',
+            properties: {
+              data: {
+                type: 'array',
+                items: {
+                  schema: '#/components/schemas/objective'
+                }
+              }
+            }
+          },
+          errors: {
+            type: 'object',
+            properties: {
+              errors: {
+                type: 'array',
+                items: {
+                  type: 'object',
+                  properties: {
+                    title: {
+                      type: 'string'
+                    },
+                    detail: {
+                      type: 'string'
+                    },
+                    source: {
+                      type: 'object',
+                      additionalProperties: {
+                        type: 'string'
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -42,5 +123,5 @@ RSpec.configure do |config|
   # The swagger_docs configuration option has the filename including format in
   # the key, this may want to be changed to avoid putting yaml in json files.
   # Defaults to json. Accepts ':json' and ':yaml'.
-  config.swagger_format = :yaml
+  config.swagger_format = :json
 end
