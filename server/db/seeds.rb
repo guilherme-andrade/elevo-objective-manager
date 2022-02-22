@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Objective.create(
+  title: 'Learn Ruby',
+  weight: 100,
+)
+
+Objective.create(
+  title: 'Learn Rails',
+  weight: 100,
+)
