@@ -9,6 +9,9 @@ import schema from "../../schema";
 
 const client = new ApiClient({
   url: API_URL,
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+  },
   schema,
 });
 

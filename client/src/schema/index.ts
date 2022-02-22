@@ -1,4 +1,4 @@
-export default {
+const schema = {
   objectives: {
     type: "objectives",
     fields: {
@@ -25,3 +25,5 @@ export default {
     },
   },
 };
+
+export default schema;

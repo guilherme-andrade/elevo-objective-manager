@@ -37,7 +37,7 @@ const ListObjectives: FC = () => {
 
   const { data, isLoading } = useQuery("objectives");
 
-  const [addObjective, {}] = useMutation("objectives");
+  const [addObjective] = useMutation("objectives");
 
   const handleAddNewClick = () => {
     setAddingNew(true);
@@ -92,6 +92,7 @@ const ListObjectives: FC = () => {
       {isLoading ? (
         <Text>loading...</Text>
       ) : (
+        data &&
         data
           .sort((objective) => objective.id)
           .map((objective) => (
@@ -166,7 +167,10 @@ const ListObjectives: FC = () => {
         </Box>
       )}
 
-      <Alert colorScheme={sumOfWeights === 100 ? "green" : "red"} rounded="md">
+      <Alert
+        colorScheme={sumOfWeights === 100 ? "gray.100" : "red"}
+        rounded="md"
+      >
         <Text>
           Total weight: {sumOfWeights} / 100
           <br />
