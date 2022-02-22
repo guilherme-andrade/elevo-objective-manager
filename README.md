@@ -1,24 +1,23 @@
-# README
+## Usage
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Clone the repository and run the following commands from the root of the repository:
 
-Things you may want to cover:
+```sh
+docker compose build
+docker compose run --rm server rails db:create db:migrate db:seed
+docker compose up
+```
 
-* Ruby version
+## Running Tests
 
-* System dependencies
+From the root of the repository, run the following command:
 
-* Configuration
+```sh
+docker compose run --rm server rspec
+```
 
-* Database creation
+> Note: 2 tests are failing in the current version of the project, both of them related to mistakes in my implementation of the tests using the rswag gem.
 
-* Database initialization
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
-
-* ...
